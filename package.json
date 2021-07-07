@@ -6,5 +6,23 @@
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "querystring": "^0.2.1"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "tsr-website-preview",
+  "version": "1.0.0",
+  "description": "A preview version of the TSR Website",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaviTSRA/TSR-Website-Preview.git"
+  },
+  "author": "GaviTSRA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GaviTSRA/TSR-Website-Preview/issues"
+  },
+  "homepage": "https://github.com/GaviTSRA/TSR-Website-Preview#readme"
 }
