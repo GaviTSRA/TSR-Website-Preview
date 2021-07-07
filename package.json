@@ -25,4 +25,7 @@
     "url": "https://github.com/GaviTSRA/TSR-Website-Preview/issues"
   },
   "homepage": "https://github.com/GaviTSRA/TSR-Website-Preview#readme"
+  "engines": {
+     "node": "12.x"
+  }
 }
