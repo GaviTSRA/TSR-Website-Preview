@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/GaviTSRA/TSR-Website-Preview#readme",
   "engines": {
-     "node": "12.x"
+    "node": "12.x"
   }
 }
