@@ -59,3 +59,5 @@ app.listen(8080, () => {
 //Routes
 app.use('/api/discord', require('./api/discord'));
 
+//CLIENT_ID = 860925869378764862
+//CLIENT_SECRET = 9ns3bFloujUKU6AZJRfYYGJsItNzVECh
