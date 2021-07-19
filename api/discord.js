@@ -4,12 +4,13 @@ const btoa = require('btoa');
 const { catchAsync } = require('../utils');
 const querystring = require("querystring");
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const router = express.Router();
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const redirect = 'http://localhost:8080/api/discord/callback'
+const redirect = process.env.REDIRECT_URI;
 
 router.use(cookieParser());
 
