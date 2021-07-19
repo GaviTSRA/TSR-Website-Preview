@@ -38,8 +38,7 @@ router.get('/login', (req, res) => {
             body: payload,
         });
         const json = await response.json();
-        console.info(json);
-        res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).send(json);
+        res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).send("/");
         }));
 
 module.exports = router;
