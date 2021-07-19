@@ -18,6 +18,12 @@ p {
     padding: 0% 0% 0% 0%;
     margin: 0% 0% 5% 0%;
 }
+.role {
+    display:inline-block;
+    font-size: 200%;
+    width:100%;
+    text-align: center;
+}
 #discordinv{
     display: inline-block;
     border:none;
@@ -49,13 +55,26 @@ p {
     border:none;
     border-radius: 4px;
     border-color: rgb(255, 255, 255);
-    background-color:crimson;
+    background-color: orange;
     color: white;
     padding: 1% 2% 1% 2%;
     width: 25%;
     text-align: center;
     margin: 0%;
-    box-shadow: 0px 0px 30px crimson; 
+    box-shadow: 0px 0px 30px orange;
+}
+#logout{
+    display: inline-block;
+    border:none;
+    border-radius: 4px;
+    border-color: rgb(255, 255, 255);
+    background-color: red;
+    color: white;
+    padding: 1% 2% 1% 2%;
+    width: 25%;
+    text-align: center;
+    margin: 2% 0px 0px 7%;
+    box-shadow: 0px 0px 30px red; 
 }
 #login {
     display: inline-block;
@@ -93,6 +112,11 @@ img {
     #plugindoc{
         padding: 1% 2% 1% 5%;
         width: 25%;
-        margin: 0% 5% 0% 35%;
+        margin: 0% 5% 2.5% 35%;
+    }
+    #logout{
+        padding: 1% 2% 1% 5%;
+        width: 25%;
+        margin: 0% 5% 2.5% 35%;
     }
 }

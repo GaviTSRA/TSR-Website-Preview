@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 const btoa = require('btoa');
 const { catchAsync } = require('../utils');
 const querystring = require("querystring");
+const cookieParser = require('cookie-parser');
 
 const router = express.Router();
 
@@ -10,8 +11,10 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const redirect = 'http://localhost:8080/api/discord/callback'
 
+router.use(cookieParser());
+
 router.get('/login', (req, res) => {
-    res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify&response_type=code&redirect_uri=${redirect}`);
+    res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify%20guilds.join%20guilds&response_type=code&redirect_uri=${redirect}`);
   });
 
 router.get('/callback', catchAsync(async (req, res) => {
@@ -34,7 +37,7 @@ router.get('/callback', catchAsync(async (req, res) => {
         body: payload,
     });
     const json = await response.json();
-    res.redirect(`/?token=${json.access_token}`);
+    res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).redirect("/");
   }));
 
 module.exports = router;
