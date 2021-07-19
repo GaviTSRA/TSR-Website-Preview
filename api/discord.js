@@ -18,28 +18,28 @@ router.get('/login', (req, res) => {
     res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify%20guilds.join%20guilds&response_type=code&redirect_uri=${redirect}`);
   });
 
-router.get('/callback', catchAsync(async (req, res) => {
-    if (!req.query.code) throw new Error('NoCodeProvided');
-    const code = req.query.code;
-    const creds = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-    payload = querystring.stringify({
-        grant_type: 'authorization_code', 
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        code: code,
-        redirect_uri: redirect
-    })
-    const response = await fetch("https://discordapp.com/api/oauth2/token", {
-        method: 'POST',
-        headers: {
-            Authorization: `Basic ${creds}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: payload,
-    });
-    const json = await response.json();
-    console.info(json);
-    res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).redirect("/");
-  }));
+    router.get('/callback', catchAsync(async (req, res) => {
+        if (!req.query.code) throw new Error('NoCodeProvided');
+        const code = req.query.code;
+        const creds = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+        payload = querystring.stringify({
+            grant_type: 'authorization_code', 
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
+            code: code,
+            redirect_uri: redirect
+        })
+        const response = await fetch("https://discordapp.com/api/oauth2/token", {
+            method: 'POST',
+            headers: {
+                Authorization: `Basic ${creds}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: payload,
+        });
+        const json = await response.json();
+        console.info(json);
+        res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).send(json);
+        }));
 
 module.exports = router;
