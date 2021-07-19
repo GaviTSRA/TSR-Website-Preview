@@ -94,7 +94,7 @@ async function getUserGuilds(req) {
 		}
 	})
 	json = await data.json();
-	console.log("Got user guilds");
+	console.log("Got user guilds: " + json);
 	return json;
 }
 

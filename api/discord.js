@@ -10,7 +10,7 @@ const router = express.Router();
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const redirect = process.env.REDIRECT_URI;
+const redirect = 'http://localhost:8080/api/discord/callback'
 
 router.use(cookieParser());
 
