@@ -38,6 +38,7 @@ router.get('/callback', catchAsync(async (req, res) => {
         body: payload,
     });
     const json = await response.json();
+    console.info(json);
     res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).redirect("/");
   }));
 
