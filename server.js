@@ -60,6 +60,10 @@ app.get('/css/staffapplication.css', function(req, res) {
     res.sendFile(__dirname + "/css/staffapplication.css");
 });
 
+app.get('/plugindoc', function(req, res) {
+    res.sendFile(__dirname + "/html/plugindoc.html")
+});
+
 app.use((err, req, res, next) => {
     switch (err.message) {
         case 'NoCodeProvided':
