@@ -1,4 +1,4 @@
-const { response } = require('express');
+const { response, query } = require('express');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -27,13 +27,22 @@ app.get('/', async (req, res) => {
                 if (err) return console.log(err);
                 var $ = cheerio.load(data)
 
-                //TODO: Show errors passed with req.query.err
-                //Errors: notJoined notUser
+                switch(req.query.err) {
+                    case "notUser":
+                        err = "You already have a higher role than 'User', so you can't apply!"
+                        break;
+                    case "notJoined":
+                        err = "You need to join the TSR Network Discord to apply as staff!"
+                        break;
+                    default:
+                        err = "";
+                }
 
-                $('p.title').text(`Welcome to the TSR Website, ${highest_role} ${util.user_data.username}!`)
-                $('img.avatar').prop("src", `https://cdn.discordapp.com/avatars/${util.user_data.id}/${util.user_data.avatar}`)
-                if(joined) $('#discordinv').prop("style", "display:none")
-                if(highest_role != "User" || !util.has_joined) $('#staffapp').prop("style", "display:none")
+                $('p.title').text(`Welcome to the TSR Website, ${highest_role} ${util.user_data.username}!`);
+                $('img.avatar').prop("src", `https://cdn.discordapp.com/avatars/${util.user_data.id}/${util.user_data.avatar}`);
+                if(joined) $('#discordinv').prop("style", "display:none");
+                if(highest_role != "User" || !util.has_joined) $('#staffapp').prop("style", "display:none");
+                if(err != "") $("#err").text(err);
                 res.set('Content-Type', 'text/html; charset=utf-8');
                 res.send($.html());
             })
