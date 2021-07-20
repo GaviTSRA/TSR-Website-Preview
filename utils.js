@@ -10,43 +10,56 @@ const catchAsyncErrors = fn => (
 	}
 );
 
-function isLoggedIn(req) {
-	if(req.cookies.token == undefined) return false;
+
+function Utils(req, debug) {
+	this.token = req.cookies.token;
+	if(debug) console.log("Got token");
+	this.debug = debug;
+}
+
+Utils.prototype.init = async function() {
+	if(this.isLoggedIn()) {
+		this.is_logged_in = this.isLoggedIn();
+		this.user_data = await this.getUserData();
+		this.user_guilds = await this.getUserGuilds();
+		this.has_joined = await this.hasJoined();
+		if(this.has_joined) {
+			this.guild_user_data = await this.getGuildUserData();
+			this.guild_roles = await this.getGuildRoles();
+			this.user_roles = await this.getUserRoles();
+			this.highest_role = await this.getHighestUserRole();			
+		}
+	}
+}
+
+Utils.prototype.isLoggedIn = function() {
+	if(this.token == undefined) return false;
 	else return true;
 }
-
-function getToken(req) {
-	//console.log("Got token");
-	return req.cookies.token;
-}
-
-async function getUserData(req) {
-	if(!isLoggedIn(req)) return undefined;
+Utils.prototype.getUserData = async function() {
+	if(!this.is_logged_in) return undefined;
 	const data = await fetch("https://discordapp.com/api/users/@me", {
 		method: "GET",
 		headers: {
-			Authorization: `Bearer ${getToken(req)}`
+			Authorization: `Bearer ${this.token}`
 		}
 	})
 	json = await data.json();
-	//console.log("Got user data: " + json);
+	if(this.debug) console.log("Got user data: " + json);
 	return json;
 }
-
-async function getGuildUserData(req) {
-	user_data = await getUserData(req);
-	const data = await fetch(`https://discordapp.com/api/guilds/818951190721200158/members/${user_data.id}`, {
+Utils.prototype.getGuildUserData = async function() {
+	const data = await fetch(`https://discordapp.com/api/guilds/818951190721200158/members/${this.user_data.id}`, {
 		method: "GET",
 		headers: {
 			Authorization: `Bot ${process.env.BOT_TOKEN}`
 		}
 	})
 	json = await data.json();
-	//console.log("Got guild user data: " + json);
+	if(this.debug) console.log("Got guild user data: " + json);
 	return json;
 }
-
-async function getGuildRoles(req) {
+Utils.prototype.getGuildRoles = async function() {
 	const data = await fetch("https://discordapp.com/api/guilds/818951190721200158/roles", {
 		method: "GET",
 		headers: {
@@ -54,60 +67,51 @@ async function getGuildRoles(req) {
 		}
 	})
 	json = await data.json();
-	//console.log("Got guild roles: " + json);
+	if(this.debug) console.log("Got guild roles: " + json);
 	return json;
 }
-
-async function getUserRoles(req) {
+Utils.prototype.getUserRoles = async function() {
 	var roles_ids = {};
 	var roles_names = {};
 	var user_roles = {};
-	guild_roles = await getGuildRoles(req);
-	guild_roles.forEach(role => {
+	this.guild_roles.forEach(role => {
 		roles_ids[role.id] = role;
 		roles_names[role.name] = role;
 	});
-	guild_user_data = await getGuildUserData(req);
-	guild_user_data.roles.forEach(role => {
+	this.guild_user_data.roles.forEach(role => {
 		user_roles[roles_ids[role].name] = roles_ids[role];
 	});
-	//console.log("Got user roles: " + json);
+	if(this.debug) console.log("Got user roles: " + json);
 	return user_roles;
 }
-
-async function getHighestUserRole(req) {
-	user_roles = await getUserRoles(req);
+Utils.prototype. getHighestUserRole = async function() {
 	highest_role = "User";
-	if("Trial Mod" in user_roles) highest_role = "Trial Mod";
-	else if("Mod" in user_roles) highest_role = "Mod";
-	else if("Admin" in user_roles) highest_role = "Admin";
-	else if("Owner" in user_roles) highest_role = "Owner";
-	//console.info("Got highest role")
+	if("Trial Mod" in this.user_roles) highest_role = "Trial Mod";
+	else if("Mod" in this.user_roles) highest_role = "Mod";
+	else if("Admin" in this.user_roles) highest_role = "Admin";
+	else if("Owner" in this.user_roles) highest_role = "Owner";
+	if(this.debug) console.info("Got highest role")
 	return highest_role;
 }
-
-async function getUserGuilds(req) {
+Utils.prototype.getUserGuilds = async function() {
 	const data = await fetch(`https://discordapp.com/api/users/@me/guilds`, {
 		method: "GET",
 		headers: {
-			Authorization: `Bearer ${await getToken(req)}`
+			Authorization: `Bearer ${this.token}`
 		}
 	})
 	json = await data.json();
-	//console.log("Got user guilds: " + json);
+	if(this.debug) console.log("Got user guilds: " + json);
 	return json;
 }
-
-
+Utils.prototype.hasJoined = async function() {
+	joined = false;
+	this.user_guilds.forEach(guild => { if(guild.id == "818951190721200158") joined = true; });
+	if(this.debug) console.info("Got joined");
+	return joined;
+}
 
 module.exports = {
 	catchAsync: catchAsyncErrors,
-    isLoggedIn: isLoggedIn,
-    getToken: getToken,
-	getUserData: getUserData,
-	getGuildUserData: getGuildUserData,
-	getGuildRoles: getGuildRoles,
-	getUserRoles: getUserRoles,
-	getHighestUserRole: getHighestUserRole,
-	getUserGuilds: getUserGuilds
+	utils: Utils
 };
