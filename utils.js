@@ -18,8 +18,9 @@ function Utils(req, debug) {
 }
 
 Utils.prototype.init = async function() {
-	if(this.isLoggedIn()) {
-		this.is_logged_in = this.isLoggedIn();
+	this.login_method = this.getLoginMethod();
+	if(this.login_method == "discord") {
+		console.info("yes")
 		this.user_data = await this.getUserData();
 		this.user_guilds = await this.getUserGuilds();
 		this.has_joined = await this.hasJoined();
@@ -32,12 +33,12 @@ Utils.prototype.init = async function() {
 	}
 }
 
-Utils.prototype.isLoggedIn = function() {
-	if(this.token == undefined) return false;
-	else return true;
+Utils.prototype.getLoginMethod = function() {
+	if(this.token == undefined) return "none";
+	else if(this.token == "guest") return "guest";
+	else return "discord";
 }
 Utils.prototype.getUserData = async function() {
-	if(!this.is_logged_in) return undefined;
 	const data = await fetch("https://discordapp.com/api/users/@me", {
 		method: "GET",
 		headers: {
