@@ -31,8 +31,8 @@ app.get('/', async (req, res) => {
                 var $ = cheerio.load(data)
                 $('p.title').text(`Welcome to the TSR Website, ${highest_role} ${user_data.username}!`)
                 $('img.avatar').prop("src", `https://cdn.discordapp.com/avatars/${user_data.id}/${user_data.avatar}`)
-                if(joined) $('#discordinvbut').prop("style", "display:none")
-                if(highest_role != "User" || !joined) $('#staffapplicationbut').prop("style", "display:none")
+                if(joined) $('#discordinv').prop("style", "display:none")
+                if(highest_role != "User" || !joined) $('#staffapp').prop("style", "display:none")
                 res.set('Content-Type', 'text/html; charset=utf-8');
                 res.send($.html());
             })

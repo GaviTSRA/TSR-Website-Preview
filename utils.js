@@ -16,7 +16,7 @@ function isLoggedIn(req) {
 }
 
 function getToken(req) {
-	console.log("Got token");
+	//console.log("Got token");
 	return req.cookies.token;
 }
 
@@ -29,7 +29,7 @@ async function getUserData(req) {
 		}
 	})
 	json = await data.json();
-	console.log("Got user data: " + json);
+	//console.log("Got user data: " + json);
 	return json;
 }
 
@@ -42,7 +42,7 @@ async function getGuildUserData(req) {
 		}
 	})
 	json = await data.json();
-	console.log("Got guild user data: " + json);
+	//console.log("Got guild user data: " + json);
 	return json;
 }
 
@@ -54,7 +54,7 @@ async function getGuildRoles(req) {
 		}
 	})
 	json = await data.json();
-	console.log("Got guild roles: " + json);
+	//console.log("Got guild roles: " + json);
 	return json;
 }
 
@@ -71,7 +71,7 @@ async function getUserRoles(req) {
 	guild_user_data.roles.forEach(role => {
 		user_roles[roles_ids[role].name] = roles_ids[role];
 	});
-	console.log("Got user roles: " + json);
+	//console.log("Got user roles: " + json);
 	return user_roles;
 }
 
@@ -82,7 +82,7 @@ async function getHighestUserRole(req) {
 	else if("Mod" in user_roles) highest_role = "Mod";
 	else if("Admin" in user_roles) highest_role = "Admin";
 	else if("Owner" in user_roles) highest_role = "Owner";
-	console.info("Got highest role")
+	//console.info("Got highest role")
 	return highest_role;
 }
 
@@ -94,7 +94,7 @@ async function getUserGuilds(req) {
 		}
 	})
 	json = await data.json();
-	console.log("Got user guilds: " + json);
+	//console.log("Got user guilds: " + json);
 	return json;
 }
 

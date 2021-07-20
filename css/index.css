@@ -4,13 +4,15 @@ body {
 }
 a {
     text-decoration:none;
+    color: white;
+    font-size: 150%;
 }
 p {
     color: white;
     font-size: 150%;
 }
 .title {
-    display:inline-block;
+    display:block;
     font-size: 300%;
     width: 100%;
     text-align: center;
@@ -31,49 +33,49 @@ p {
     border-color: rgb(255, 255, 255);
     background-color: blue;
     color: white;
-    padding: 1% 2% 1% 2%;
-    width: 25%;
     text-align: center;
-    margin: 0px 0px 0px 7%;
     box-shadow: 0px 0px 30px blue; 
+    padding: 1% 2% 1% 5%;
+    width: 25%;
+    margin: 0% 5% 2.5% 35%;
 }
-#staffap{
-    display: inline-block;
+#staffapp{
+    display: block;
     border:none;
     border-radius: 4px;
     border-color: rgb(255, 255, 255);
     background-color: green;
     color: white;
-    padding: 1% 2% 1% 2%;
-    width: 25%;
     text-align: center;
-    margin: 0% 1% 0% 1%;
+    padding: 1% 2% 1% 5%;
+    width: 25%;
+    margin: 0% 5% 1% 35%;
     box-shadow: 0px 0px 30px green; 
 }
 #plugindoc{
-    display: inline-block;
+    display: block;
     border:none;
     border-radius: 4px;
     border-color: rgb(255, 255, 255);
     background-color: orange;
     color: white;
-    padding: 1% 2% 1% 2%;
-    width: 25%;
     text-align: center;
-    margin: 0%;
+    padding: 1% 2% 1% 5%;
+    width: 25%;
+    margin: 0% 5% 1% 35%;
     box-shadow: 0px 0px 30px orange;
 }
 #logout{
-    display: inline-block;
+    display: block;
     border:none;
     border-radius: 4px;
     border-color: rgb(255, 255, 255);
     background-color: red;
     color: white;
-    padding: 1% 2% 1% 2%;
-    width: 25%;
     text-align: center;
-    margin: 2% 0px 0px 7%;
+    padding: 1% 2% 1% 5%;
+    width: 25%;
+    margin: 0% 5% 1% 35%;
     box-shadow: 0px 0px 30px red; 
 }
 #login {
@@ -94,29 +96,4 @@ img {
     margin-left: auto;
     margin-right: auto;
     width: 10%;
-}
-@media screen and (max-width:1100px) {
-    .title {
-        display:block;
-    }
-    #discordinv{
-        padding: 1% 2% 1% 5%;
-        width: 25%;
-        margin: 0% 5% 2.5% 35%;
-    }
-    #staffap{
-        padding: 1% 2% 1% 5%;
-        width: 25%;
-        margin: 0% 5% 2.5% 35%;
-    }
-    #plugindoc{
-        padding: 1% 2% 1% 5%;
-        width: 25%;
-        margin: 0% 5% 2.5% 35%;
-    }
-    #logout{
-        padding: 1% 2% 1% 5%;
-        width: 25%;
-        margin: 0% 5% 2.5% 35%;
-    }
 }
