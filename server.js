@@ -4,7 +4,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const cookieParser = require('cookie-parser');
-const { utils } = require('./utils');
+const { utils } = require('./js/utils');
 
 const app = express();
 require('dotenv').config();
@@ -77,11 +77,11 @@ app.get('/staffapplication', async (req, res) => {
         else {
             fs.readFile(__dirname + '/html/staffapplication.html', 'utf8', function (err,data) {
                 if (err) return console.log(err);
-                var $ = cheerio.load(data)
-                $('#dcname').prop("value", `${util.user_data.username}#${util.user_data.discriminator}`)
+                var $ = cheerio.load(data);
+                $('#dcname').prop("value", `${util.user_data.username}#${util.user_data.discriminator}`);
                 res.set('Content-Type', 'text/html; charset=utf-8');
                 res.send($.html());
-            })
+            });
         }
     }
 });
@@ -89,8 +89,37 @@ app.get('/staffapplication', async (req, res) => {
 app.get('/plugindoc', async function(req, res) {
     util = new utils(req, false);
     await util.init();
-    if(util.login_method == "none") res.redirect("/");
-    else res.sendFile(__dirname + "/html/plugindoc.html");
+    if(util.login_method == "none") res.redirect("/"); 
+    else {
+        fs.readFile(__dirname + "/html/plugindoc.html", "utf8", function (err,data) {
+            if(err) return console.log(err);
+            var $ = cheerio.load(data);
+            if(util.login_method == "guest") role = "User";
+            else role = util.highest_role;
+            switch(role) {
+                case "Admin":
+                    $('.owner').empty();
+                    break;
+                case "Mod":
+                    $('.owner').remove();
+                    $('.admin').remove();
+                    break;
+                case "Trial Mod":
+                    $('.owner').remove();
+                    $('.admin').remove();
+                    $('.mod').remove();
+                    break;
+                case "User":
+                    $('.owner').remove();
+                    $('.admin').remove();
+                    $('.mod').remove();
+                    $('.trialmod').remove()
+                    break;
+            }
+            res.set('Content-Type', 'text/html; charset=utf-8');
+            res.send($.html());
+        });
+    }
 });
 
 app.use((err, req, res, next) => {
@@ -109,7 +138,9 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/css", express.static(path.join(__dirname, "css")));
-app.use('/login', require('./login'));
+app.use('/login', require('./js/login'));
+//app.use("/software", require('./js/software'))
+//app.use("/db", require("./js/database"))
 
 app.listen(process.env.PORT || 8080, () => {
     console.info('Running on port 8080');

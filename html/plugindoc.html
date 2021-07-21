@@ -29,7 +29,7 @@
         <p style="font-size: 300%;">TSR Server Plugin Documentation</p>
         <p style="font-size: 250%;">Commands</p>
         <table style="align-self: center; width: 100%;">
-            <tr>
+            <tr class="player">
                 <th>
                     <p>Name</p>
                 </th>
@@ -43,7 +43,7 @@
                     <p>Function</p>
                 </th>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/info</p>
                 </td>
@@ -58,7 +58,7 @@
                     <p>Prints some information to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/rules</p>
                 </td>
@@ -72,7 +72,7 @@
                     <p>Prints the rules to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/discord</p>
                 </td>
@@ -86,7 +86,7 @@
                     <p>Prints the discord invite to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/players</p>
                 </td>
@@ -100,7 +100,7 @@
                     <p>Prints playername, uuid and id for every player to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/hub</p>
                 </td>
@@ -114,7 +114,7 @@
                     <p>Connects the user to the hub</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/pm</p>
                 </td>
@@ -128,7 +128,7 @@
                     <p>Sends the player with ID the private MESSAGE</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/stats</p>
                 </td>
@@ -142,7 +142,7 @@
                     <p>Prints your level, xp and gold amount to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/mytrails</p>
                 </td>
@@ -156,7 +156,7 @@
                     <p>Prints all the trails from PAGE you own to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/trails</p>
                 </td>
@@ -170,7 +170,7 @@
                     <p>Prints all the trails of PAGE to the chat</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/buy</p>
                 </td>
@@ -184,7 +184,7 @@
                     <p>Buy the trails with ID</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/use</p>
                 </td>
@@ -198,7 +198,7 @@
                     <p>Use the the trails with ID or none</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="player">
                 <td>
                     <p>/skip</p>
                 </td>
@@ -212,7 +212,7 @@
                     <p>y: Vote to skip the map. If enough players vote, the map is skipped. <br>f: Force skip the map</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
                     <p>/unit</p>
                 </td>
@@ -226,7 +226,7 @@
                     <p>Spawn UNITNAME at your location</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
                     <p>/team</p>
                 </td>
@@ -240,9 +240,9 @@
                     <p>Changes your team to ID</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
-                    <p>/killunits/p>
+                    <p>/killunits</p>
                 </td>
                 <td>
                     <p>---</p>
@@ -254,7 +254,7 @@
                     <p>Kills all non-player-controlled units on the server</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
                     <p>/ukill</p>
                 </td>
@@ -268,7 +268,7 @@
                     <p>Kills all UNITNAME units</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
                     <p>/bans</p>
                 </td>
@@ -282,7 +282,7 @@
                     <p>List all bans</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="trialmod">
                 <td>
                     <p>/configs</p>
                 </td>
@@ -296,7 +296,7 @@
                     <p>List all configs with their value</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="mod">
                 <td>
                     <p>/kick</p>
                 </td>
@@ -310,7 +310,7 @@
                     <p>Kick a player with ID for SECONDS because of REASON</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="mod">
                 <td>
                     <p>/killall</p>
                 </td>
@@ -324,7 +324,7 @@
                     <p>Kills all units, including players. Only use in worst-case</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="mod">
                 <td>
                     <p>/pteam</p>
                 </td>
@@ -338,7 +338,7 @@
                     <p>Changes the team of the player with ID to TEAMID</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="mod">
                 <td>
                     <p>/announce</p>
                 </td>
@@ -352,7 +352,7 @@
                     <p>Shows the MESSAGE in the middle of everyone's screen</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/ban</p>
                 </td>
@@ -366,7 +366,7 @@
                     <p>Bans the player with ID because of REASON</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/bc</p>
                 </td>
@@ -380,7 +380,7 @@
                     <p>Make a popup with MESSAGE appear in the middle of everyone's screen</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/destroylogic</p>
                 </td>
@@ -394,7 +394,7 @@
                     <p>Destroy each logic block with CODE</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/destroyfacs</p>
                 </td>
@@ -408,7 +408,7 @@
                     <p>Destroy all factories</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/destroy</p>
                 </td>
@@ -422,7 +422,7 @@
                     <p>Destroy all BLOCKNAME</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="admin">
                 <td>
                     <p>/js</p>
                 </td>
@@ -436,7 +436,7 @@
                     <p>Execute JS code, if enableAdminJS is enabled, admins can use this command</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="owner">
                 <td>
                     <p>/setconf</p>
                 </td>
@@ -450,7 +450,7 @@
                     <p>Set the VALUE of the KEY config</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="owner">
                 <td>
                     <p>/resetconf</p>
                 </td>
@@ -464,7 +464,7 @@
                     <p>Reset all configs to their standard value</p>
                 </td>
             </tr>
-            <tr>
+            <tr class="owner">
                 <td>
                     <p>/setperm</p>
                 </td>

@@ -20,7 +20,6 @@ function Utils(req, debug) {
 Utils.prototype.init = async function() {
 	this.login_method = this.getLoginMethod();
 	if(this.login_method == "discord") {
-		console.info("yes")
 		this.user_data = await this.getUserData();
 		this.user_guilds = await this.getUserGuilds();
 		this.has_joined = await this.hasJoined();
