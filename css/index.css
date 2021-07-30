@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    background-image: linear-gradient(to right, goldenrod , coral, teal);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'sans-serif';
 }
 a {
@@ -8,21 +9,21 @@ a {
     font-size: 150%;
 }
 .login {
-    display: inline-block;
-    border:none;
+    display: block;
     border-radius: 4px;
-    border-color: rgb(255, 255, 255);
-    color: white;
     padding: 2.5% 2% 2.5% 2%;
     width: 25%;
     text-align: center;
     margin: 5% 0% 0% 37.5%;
+    border-style: solid;
 }
 #discord {
-    box-shadow: 0px 0px 30px blue;
+    box-shadow: 0px 0px 70px blue;
+    border-color: rgb(2, 2, 173);
     background-color:blue;
 }
 #guest {
-    box-shadow: 0px 0px 30px gray;
+    box-shadow: 0px 0px 70px gray;
+    border-color: rgb(104, 104, 104);
     background-color:gray;
 }
