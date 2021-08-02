@@ -139,7 +139,7 @@ app.use((err, req, res, next) => {
 
 app.use("/css", express.static(path.join(__dirname, "css")));
 app.use('/login', require('./js/login'));
-//app.use("/software", require('./js/software'))
+app.use("/software", require('./js/software'))
 //app.use("/db", require("./js/database"))
 
 app.listen(process.env.PORT || 8080, () => {
