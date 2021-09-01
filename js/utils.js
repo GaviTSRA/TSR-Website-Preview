@@ -106,7 +106,9 @@ Utils.prototype.getUserGuilds = async function() {
 }
 Utils.prototype.hasJoined = async function() {
 	joined = false;
-	this.user_guilds.forEach(guild => { if(guild.id == "818951190721200158") joined = true; });
+	this.user_guilds.forEach(guild => { 
+		if(guild.id == "818951190721200158") joined = true; 
+	});
 	if(this.debug) console.info("Got joined");
 	return joined;
 }

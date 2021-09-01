@@ -27,22 +27,30 @@ app.get('/', async (req, res) => {
                 else highest_role = ""; 
             }
 
-            fs.readFile(__dirname + '/html/logged-in.html', 'utf8', function (err,data) {
-                if (err) return console.log(err);
+            fs.readFile(__dirname + '/html/logged-in.html', 'utf8', function (er,data) {
+                if (er) return console.log(er);
                 var $ = cheerio.load(data)
+
+                err = ""
+                msg = ""
 
                 switch(req.query.err) {
                     case "notUser":
                         err = "You already have a higher role than 'User', so you can't apply!";
                         break;
                     case "notJoined":
-                        err = "You need to join the TSR Network Discord to apply as staff!";
+                        err = "You need to join the TSR Network Discord!";
                         break;
                     case "notDiscord":
-                        err = "You need to use a discord account to apply!";
+                        err = "You need to use a discord account!";
                         break;
                     default:
                         err = "";
+                }
+
+                switch(req.query.msg) {
+                    case "apSend": 
+                    msg = "Your application has been send!"
                 }
 
                 if(util.login_method == "discord") {
@@ -59,29 +67,10 @@ app.get('/', async (req, res) => {
                 }
 
                 if(err != "") $("#err").text(err);
+                if(msg != "") $("#msg").text(msg);
                 res.set('Content-Type', 'text/html; charset=utf-8');
                 res.send($.html());
             })
-        }
-    }
-});
-
-app.get('/staffapplication', async (req, res) => {
-    util = new utils(req, false);
-    await util.init();
-    if(util.login_method == "none") res.redirect('/');
-    if(util.login_method == "guest") res.redirect('/?err=notDiscord')
-    else if (!util.has_joined) res.redirect("/?err=joinDiscord")
-    else {
-        if(util.highest_role != "User") res.redirect("/?err=notUser")
-        else {
-            fs.readFile(__dirname + '/html/staffapplication.html', 'utf8', function (err,data) {
-                if (err) return console.log(err);
-                var $ = cheerio.load(data);
-                $('#dcname').prop("value", `${util.user_data.username}#${util.user_data.discriminator}`);
-                res.set('Content-Type', 'text/html; charset=utf-8');
-                res.send($.html());
-            });
         }
     }
 });
@@ -140,7 +129,7 @@ app.use((err, req, res, next) => {
 app.use("/css", express.static(path.join(__dirname, "css")));
 app.use('/login', require('./js/login'));
 app.use("/software", require('./js/software'))
-//app.use("/db", require("./js/database"))
+app.use("/staffapplication", require("./js/staffapplication"))
 
 app.listen(process.env.PORT || 8080, () => {
     console.info('Running on port 8080');

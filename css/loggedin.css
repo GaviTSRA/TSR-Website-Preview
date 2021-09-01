@@ -38,6 +38,10 @@ img {
     color: red;
     text-align: center;
 }
+#msg {
+    color:yellow;
+    text-align: center;
+}
 #discordinv{
     border-color: rgb(2, 2, 173);
     background-color: blue;
