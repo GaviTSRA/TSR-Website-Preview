@@ -3,13 +3,29 @@
     <head>
         <title>TSR Website | Home</title>
         <link rel="stylesheet", href="css/loggedin.css">
+        <script>
+            function changeBg() {
+                cookies=decodeURIComponent(document.cookie).split(";");
+                bg=""
+                for(var i=0;i<cookies.length;i++) {
+                    if(cookies[i].startsWith(" bg")) bg=cookies[i].replace("bg=", "");
+                }
+                console.info(bg)
+                if(bg==" gradient") {
+                    document.cookie = "bg=black"
+                } else document.cookie = "bg=gradient"
+                console.info(document.cookie)
+                window.location.href = window.location.href.split("?")[0]
+            }
+        </script>
     </head>
-    <body>
+    <body class="gradient">
         <header>
             
             <nav>
                 <img class="avatar">
                 <p class="title"><strong>Welcome to the TSR Website, ERROR!</strong></p>
+                <input type=image onclick="changeBg()" id="switchBg" src="/resources/gradient.png"></input>
                 <p id="err"></p>
                 <p id="msg"></p>
                 <a href="https://discord.gg/yhSGPT2cu2", target="_blank", id="discordinv", class="menuoption">Discord Invite</a><br>

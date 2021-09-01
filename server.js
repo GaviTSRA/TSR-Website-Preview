@@ -59,17 +59,22 @@ app.get('/', async (req, res) => {
                     if(util.has_joined) $('#discordinv').prop("style", "display:none");
                     if(highest_role != "User" || !util.has_joined) $('#staffapp').prop("style", "display:none");
                 }
-
                 else {
                     $('p.title').text("Welcome to the TSR Website, Guest!")
                     $('#discordinv').prop("style", "display:none");
                     $('#staffapp').prop("style", "display:none");
                 }
 
+                $("body").prop("class", req.cookies.bg);
+                //TODO change image src
+                $("#switchBg").prop("src", "/resources/"+req.cookies.bg+".png")
+
                 if(err != "") $("#err").text(err);
                 if(msg != "") $("#msg").text(msg);
-                res.set('Content-Type', 'text/html; charset=utf-8');
-                res.send($.html());
+                //res.set('Content-Type', 'text/html; charset=utf-8');
+                if(req.cookies.bg==undefined){
+                    res.cookie("bg", "gradient").send($.html())
+                } else res.send($.html());
             })
         }
     }
@@ -127,6 +132,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/css", express.static(path.join(__dirname, "css")));
+app.use("/resources", express.static(path.join(__dirname, "resources")))
 app.use('/login', require('./js/login'));
 app.use("/software", require('./js/software'))
 app.use("/staffapplication", require("./js/staffapplication"))
