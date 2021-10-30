@@ -57,7 +57,11 @@ app.get('/', async (req, res) => {
 
                 switch(req.query.msg) {
                     case "apSend": 
-                    msg = "Your application has been send!"
+                        msg = "Your application has been send!"
+                    break;
+                    case "trSend":
+                        msg = "Thanks for translating! Your translation was send!"
+                    break;
                 }
 
                 if(util.login_method == "discord") {

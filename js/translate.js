@@ -63,7 +63,7 @@ router.get("/submit", catchAsync(async (req,res) => {
                 }]
             })
     });
-    res.redirect("/?msg=apSend");
+    res.redirect("/?msg=trSend");
 })); 
 
 module.exports = router;
