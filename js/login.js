@@ -15,10 +15,11 @@ const redirect = process.env.REDIRECT_URI;
 router.use(cookieParser());
 
 router.get('/discord', (req, res) => {
-    res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify%20guilds&response_type=code&redirect_uri=${redirect}`);
+    res.cookie("goto", req.query.goto).redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify%20guilds&response_type=code&redirect_uri=${redirect}`);
 });
 
 router.get('/discord/callback', catchAsync(async (req, res) => {
+    var goto = req.cookies.goto
     if (!req.query.code) throw new Error('NoCodeProvided');
     const code = req.query.code;
     const creds = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
@@ -39,12 +40,16 @@ router.get('/discord/callback', catchAsync(async (req, res) => {
     });
     const json = await response.json();
     console.info("Discord login done")
-    res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).redirect("/");
+    if (goto != "" && goto != undefined && goto != "undefined") {
+        res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).clearCookie("goto", "").redirect("/" + goto);
+    } else res.cookie('token', json.access_token, {maxAge: 60000 * 60 * 24 * 7}).redirect("/");
 }));
 
 router.get('/guest', (req, res) => {
     console.info("Guest login done")
-    res.cookie('token', 'guest').redirect("/");
+    if (req.query.goto != "" && req.query.goto != undefined) {
+        res.cookie('token', 'guest').redirect("/" + req.query.goto)
+    } else res.cookie('token', 'guest').redirect("/");
 });
 
 module.exports = router;

@@ -7,6 +7,9 @@ p {
     font-size: 150%;
     text-align: center;
 }
+a {
+    text-decoration:none;
+}
 input {
     display: block;
     margin: auto;

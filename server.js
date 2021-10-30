@@ -15,9 +15,16 @@ app.get('/', async (req, res) => {
     await util.init();
 
     if(util.login_method == "none") {
-        res.sendFile(path.join(__dirname, 'html/index.html'));
-    } 
-    else {
+        fs.readFile(__dirname + '/html/index.html', 'utf8', function (er,data) {
+            if (er) return console.log(er);
+            var $ = cheerio.load(data)
+            if (req.query.goto != "" && req.query.goto != undefined) {
+                $("#discord").prop("href", "/login/discord?goto=" + req.query.goto)
+                $("#guest").prop("href", "/login/guest?goto=" + req.query.goto)
+            }
+            res.send($.html());
+        })
+    } else {
         if(req.query.logout == "true") {
             res.clearCookie("token").redirect("/");
         } 
@@ -66,7 +73,6 @@ app.get('/', async (req, res) => {
                 }
 
                 $("body").prop("class", req.cookies.bg);
-                //TODO change image src
                 $("#switchBg").prop("src", "/resources/"+req.cookies.bg+".png")
 
                 if(err != "") $("#err").text(err);
@@ -136,6 +142,7 @@ app.use("/resources", express.static(path.join(__dirname, "resources")))
 app.use('/login', require('./js/login'));
 app.use("/software", require('./js/software'))
 app.use("/staffapplication", require("./js/staffapplication"))
+app.use("/translate", require("./js/translate"))
 
 app.listen(process.env.PORT || 8080, () => {
     console.info('Running on port 8080');

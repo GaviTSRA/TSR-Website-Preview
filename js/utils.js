@@ -84,7 +84,7 @@ Utils.prototype.getUserRoles = async function() {
 	if(this.debug) console.log("Got user roles: " + json);
 	return user_roles;
 }
-Utils.prototype. getHighestUserRole = async function() {
+Utils.prototype.getHighestUserRole = async function() {
 	highest_role = "User";
 	if("Trial Mod" in this.user_roles) highest_role = "Trial Mod";
 	else if("Mod" in this.user_roles) highest_role = "Mod";
