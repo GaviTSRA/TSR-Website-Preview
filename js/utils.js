@@ -89,6 +89,7 @@ Utils.prototype.getHighestUserRole = async function() {
 	if("Trial Mod" in this.user_roles) highest_role = "Trial Mod";
 	else if("Mod" in this.user_roles) highest_role = "Mod";
 	else if("Admin" in this.user_roles) highest_role = "Admin";
+	else if("Co Owner" in this.user_roles) highest_role = "Co Owner";
 	else if("Owner" in this.user_roles) highest_role = "Owner";
 	if(this.debug) console.info("Got highest role")
 	return highest_role;
