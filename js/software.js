@@ -12,6 +12,9 @@ router.get('/', catchAsync(async (req, res) => {
             case "discordrp":
                 res.download("./software/discordrp.py");
                 break;
+	    case "skribblbot":
+                res.download("./software/skribblbot.py");
+                break;
             default:
                 res.status(404);
                 break;
