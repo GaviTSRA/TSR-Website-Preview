@@ -142,6 +142,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/css", express.static(path.join(__dirname, "css")));
+app.use("/", express.static(path.join(__dirname, "public")))
 app.use("/resources", express.static(path.join(__dirname, "resources")))
 app.use('/login', require('./js/login'));
 app.use("/software", require('./js/software'))
