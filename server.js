@@ -148,6 +148,7 @@ app.use('/login', require('./js/login'));
 app.use("/software", require('./js/software'))
 app.use("/staffapplication", require("./js/staffapplication"))
 app.use("/translate", require("./js/translate"))
+app.use("/api", require("./js/api"))
 
 app.listen(process.env.PORT || 8080, () => {
     console.info('Running on port 8080');
