@@ -15,6 +15,9 @@ router.get('/', catchAsync(async (req, res) => {
 	    case "skribblbot":
                 res.download("./software/skribblbot.py");
                 break;
+	    case "supportapp": 
+                res.download("./software/supportapp.zip");
+                break;
             default:
                 res.status(404);
                 break;
