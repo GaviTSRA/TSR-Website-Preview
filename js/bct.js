@@ -75,8 +75,6 @@ router.get('/get_res', catchAsync(async (req, res) => {
 
 router.post('/set_res', catchAsync(async (req, res) => {
     if (req.headers.client_id == undefined || req.body.res == undefined) {
-        console.log(req.headers.client_id)
-        console.log(req.body.res)
         res.sendStatus(400)
         return
     }
