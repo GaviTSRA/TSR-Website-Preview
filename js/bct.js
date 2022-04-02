@@ -39,7 +39,6 @@ router.get('/remove_client', catchAsync(async (req, res) => {
     var new_clients = []
     clients.forEach(client => {
         if(req.headers.client_id != client) {
-            console.log("ADDED")
             new_clients.push(client)
         }
     });
@@ -75,8 +74,10 @@ router.get('/get_res', catchAsync(async (req, res) => {
 }));
 
 router.post('/set_res', catchAsync(async (req, res) => {
-    if (req.headers.client_id == undefined) res.sendStatus(400)
-    if (req.body.res == undefined) res.sendStatus(400)
+    if (req.headers.client_id == undefined || req.body.res == undefined) {
+        res.sendStatus(400)
+        return
+    }
     var client_res = readFile("res.txt")
     client_res[req.headers.client_id] = req.body.res
     writeFile("res.txt", client_res)
