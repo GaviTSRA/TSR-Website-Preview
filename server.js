@@ -5,10 +5,12 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const cookieParser = require('cookie-parser');
 const { utils } = require('./js/utils');
+var bodyParser = require("body-parser")
 
 const app = express();
 require('dotenv').config();
 app.use(cookieParser());
+app.use(bodyParser.json())
 
 app.get('/', async (req, res) => {
     util = new utils(req, false);
@@ -151,5 +153,8 @@ app.use("/translate", require("./js/translate"))
 app.use("/api", require("./js/api"))
 
 app.listen(process.env.PORT || 8080, () => {
+    fs.writeFileSync("cmds.txt", "{}")
+    fs.writeFileSync("res.txt", "{}")
+    fs.writeFileSync("clients.txt", JSON.stringify({ clients: [] }))
     console.info('Running on port 8080');
 });

@@ -43,4 +43,6 @@ router.get('/info', catchAsync(async (req, res) => {
     res.send({"code": 200, "coins": coins, "goal": process.env.GOAL})
 }));
 
+router.use("/bct", require("./bct"))
+
 module.exports = router;

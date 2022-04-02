@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/GaviTSRA/TSR-Website-Preview#readme",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "btoa": "^1.2.1",
     "cheerio": "*",
     "cookie-parser": "^1.4.5",
