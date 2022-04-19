@@ -155,6 +155,7 @@ app.use("/api", require("./js/api"))
 app.listen(process.env.PORT || 8080, () => {
     fs.writeFileSync("cmds.txt", "{}")
     fs.writeFileSync("res.txt", "{}")
+    fs.writeFileSync("invalid_users.txt", "0,")
     fs.writeFileSync("clients.txt", JSON.stringify({ clients: [] }))
     console.info('Running on port 8080');
 });

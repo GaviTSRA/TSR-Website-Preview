@@ -25,36 +25,47 @@ router.get('/', catchAsync(async (req, res) => {
             res.send($.html());
         })
     } else {
-        await fetch(process.env.WEBHOOK, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({"username": "TSR Website | Staff Application", "avatar_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHSjXLtyEEcZjGhUu6V3WRo7MxhGKN-i9KzLhQCV_T2sfxVYr-&usqp=CAU","content": "","embeds": [{
-                    "title": "**Staffapplication of "+req.query.dcname+"**",
-                    "fields": [
-                        {
-                        "name": "What is your mindustry name?",
-                        "value": req.query.mdname
-                        },
-                        {
-                        "name": "Why do you want to become staff?",
-                        "value": req.query.reason
-                        },
-                        {
-                        "name": "How long have you been playing mindustry?",
-                        "value": req.query.playtime
-                        },
-                        {
-                        "name": "Have you got any experience in being staff on discord / in mindustry?",
-                        "value": req.query.experience
-                        }
-                    ]
-                    }]
-                })
-        });
-        res.redirect("/?msg=apSend");
+        if (validReq(req)) {
+            await fetch(process.env.WEBHOOK, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({"username": "TSR Website | Staff Application", "avatar_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHSjXLtyEEcZjGhUu6V3WRo7MxhGKN-i9KzLhQCV_T2sfxVYr-&usqp=CAU","content": "","embeds": [{
+                        "title": "**Staffapplication of "+util.user_data.username+"#"+util.user_data.discriminator+"**",
+                        "fields": [
+                            {
+                            "name": "What is your mindustry name?",
+                            "value": req.query.mdname
+                            },
+                            {
+                            "name": "Why do you want to become staff?",
+                            "value": req.query.reason
+                            },
+                            {
+                            "name": "How long have you been playing mindustry?",
+                            "value": req.query.playtime
+                            },
+                            {
+                            "name": "Have you got any experience in being staff on discord / in mindustry?",
+                            "value": req.query.experience
+                            }
+                        ]
+                        }]
+                    })
+            });
+            res.redirect("/?msg=apSend");
+        } else {
+            res.sendStatus(401)
+        }
     }
 }));
+
+function validReq(req) {
+    invalid_users_data = fs.readFileSync("invalid_users.txt", 'utf8')
+    invalid_users = invalid_users_data.split(",")
+    fs.writeFileSync("invalid_users.txt", invalid_users_data + util.user_data.username+"#"+util.user_data.discriminator+",")
+    return !invalid_users.includes(util.user_data.username+"#"+util.user_data.discriminator)
+}
 
 module.exports = router;
